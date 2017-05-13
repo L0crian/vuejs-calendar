@@ -1,22 +1,37 @@
 <template>
     <div>
-        <div v-for="week in weeks">
-            Week
-            <calendar-day v-for="day in week" :day="day"></calendar-day>
+        <div id="day-bar">
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+            <div>Sun</div>
+        </div>
+        <div id="calendar">
+            <div v-for="week in weeks" class="calendar-week">
+                <calendar-day v-for="day in week" :day="day"></calendar-day>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     import CalendarDay from './CalendarDay.vue'
+
     export default {
         data() {
             return {
-                month: 2,
-                year: 2017
             }
         },
         computed: {
+            month() {
+                return this.$store.state.currentMonth;
+            },
+            year() {
+                return this.$store.state.currentMonth;
+            },
             days() {
                 let days = [];
                 let currentDay = this.$moment(`${this.year}-${this.month}-1`, 'YYYY-M-D');
